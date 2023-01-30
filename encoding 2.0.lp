@@ -1,7 +1,12 @@
-
 %We need a timelimit to have a finite range of move-atoms
 %Timelimit
-timelim(10).
+timelim(15).
+
+%Alternatively one can use #minimize statements to find the lowest timelimit.
+%{timelim(1..15)}=1:-.
+%#minimize{T:timelim(T)}.
+
+
 %allowed timesteps
 timesteps(1..T):-timelim(T).
 
@@ -41,7 +46,7 @@ edge(U,V):-edge(V,U).
 %vertex conflcit
 :-move(R1,(_,_),(X,Y),T),move(R2,(_,_),(X,Y),T),R1!=R2.
 
-%edge conflict
+%swap conflict
 :-move(R1,U,V,T),move(R2,V,U,T),R1!=R2.
 
 
@@ -57,6 +62,5 @@ plan(R,(X2-X1,Y2-Y1),T):-move(R,(X1,Y1),(X2,Y2),T).
 
 #show path/3.
 #show plan/3.
-
 
 
